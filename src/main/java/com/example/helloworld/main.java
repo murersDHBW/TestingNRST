@@ -11,6 +11,8 @@ public class Main {
         int max = 600;
 
         return (int)Math.floor(Math.random()*(max-min+1)+min);
+
+        
     }
 
 }
