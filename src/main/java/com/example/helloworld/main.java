@@ -1,6 +1,8 @@
 package com.example.helloworld;
 
-public class Main {
+import java.util.Random;
+
+class Main {
     public static void main (String[] args) {
 
 
@@ -8,21 +10,26 @@ public class Main {
         System.out.print(randomNumber());
     }
 
-    public static int randomNumber(){
-        float min = 1;
-        float max = 600;
+    public static double randomNumber(){
+        double min = 1;
+        double max = 600;
 
-        return (int)Math.floor(Math.random()*(max-min+1)+min);
+        double randomFloatNumber = min + Math.random() * (max - min);
+        return randomFloatNumber;
+
+//        return (int)Math.floor(Math.random()*(max-min+1)+min);
 
 
     }
 
     public static void reactions(){
-        int p = randomNumber();
+        double p = randomNumber();
         if (p < 50 && p >= 0){
             System.out.println("Akustisches Signal und Benachrichtigung an Betriebsführer");
         }
-        else if (p >= 301 && p <= 501)
+        else if (p >= 301 && p <= 501){
+            // do sth
+        }
 
     }
 
