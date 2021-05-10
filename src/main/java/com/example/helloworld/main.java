@@ -2,7 +2,15 @@ package com.example.helloworld;
 
 public class main {
     public static void main (String[] args) {
-        System.out.print("Hallo");
+
+        System.out.print(randomNumber());
+    }
+
+    public static int randomNumber(){
+        int min = 1;
+        int max = 600;
+
+        return (int)Math.floor(Math.random()*(max-min+1)+min);
     }
 
 }
