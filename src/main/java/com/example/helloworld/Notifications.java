@@ -2,28 +2,42 @@ package com.example.helloworld;
 
 public class Notifications {
 
-    public void n1() {
-        String n1 = {id, String}
-    }
+    public static StatusCode GetStatusForTankQuantity(double p){
 
-
-
-/*
-            if (p <= 49 && p >= 1){
-        answer = "Füllstand:" + p + ".Akustisches Signal und Benachrichtigung an Betriebsführer";
-    }
+        if (p <= 49 && p >= 1){
+            StatusCode code = StatusCodes.CriticalUnderpresssure;
+            code.TankPressure = p;
+            return code;
+        }
         else if (p >= 301 && p <= 501){
-        answer = "Füllstand:" + p + ".Akustisches Signal, Benachrichtigung an Betriebsführer und Information an Wartungsteam";
-    }
+            StatusCode code = StatusCodes.CriticalOverpressure;
+            code.TankPressure = p;
+            return code;
+        }
         else if(p >= 501){
-        answer = "Füllstand:" + p + ".Alarm auslösen und Evakuierung des Gebäudes";
-    }
+            StatusCode code = StatusCodes.DangerAhead;
+            code.TankPressure = p;
+            return code;
+        }
         else if(p >= 181 && p<= 219){
-        answer = "Füllstand:" + p + ". Der Stand ist in einem Soliden gediegenen Bereich";
+            StatusCode code = StatusCodes.OptimalQuantity;
+            code.TankPressure = p;
+            return code;
+        }
+        else if(p >= 50 && p<= 180){
+            StatusCode code = StatusCodes.Underpressure;
+            code.TankPressure = p;
+            return code;
+        }
+        else if(p >= 220){
+            StatusCode code = StatusCodes.Overpressure;
+            code.TankPressure = p;
+            return code;
+        }
+
+        // Kein Status
+        return StatusCodes.StatusError;
     }
-        else if(p >= 50 && p<= 180 || p >= 220 && p<= 300){
-        answer = "Füllstand:" + p + ". Benachrichtigung an Betriebsführer und Information an Wartungsteam";
-    }
-    
- */
 }
+
+
