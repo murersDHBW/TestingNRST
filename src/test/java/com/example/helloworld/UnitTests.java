@@ -5,6 +5,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 
+import java.time.Duration;
+import java.time.Instant;
+import java.util.concurrent.TimeUnit;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class UnitTests {
@@ -59,7 +63,7 @@ class UnitTests {
     @Test
     @DisplayName("Tankdruck Logtest")
     @Description("Prüft ob etwas in das Log geschrieben wird, wenn der Tank keinen optimalen Druck hat")
-    void CheckPressureLimitLogging(){
+    void CheckPressureLimitLogging() {
         Tank t1 = new Tank();
         StatusCode statusCode = t1.GetStatusForTankQuantity();
 
@@ -71,8 +75,28 @@ class UnitTests {
         int logCount = log.LogCount;
         notifications.ReactToStatusCode(statusCode);
 
-        if(statusCode != TankStatusCodes.OptimalQuantity){
+        if (statusCode != TankStatusCodes.OptimalQuantity) {
             assertTrue(logCount != log.LogCount);
+        }
+    }
+
+    @Test
+    @DisplayName("Prüfe Tank Antwortzeit")
+    @Description("Es wird 30 Minuten lang getestet, ob die Antwortzeit des Tanks stetig unter 10ms liegt.")
+    void EnsureTankStatusMessageBelow10ms() {
+        Tank testTank = new Tank();
+
+        long testDuration = TimeUnit.NANOSECONDS.convert(30L, TimeUnit.MINUTES);
+        long endTime = System.nanoTime() + testDuration;
+
+        while (System.nanoTime() < endTime) {
+            Instant starts = Instant.now();
+            testTank.GetStatusForTankQuantity();
+            Instant ends = Instant.now();
+
+            // 10_000_000 Nanosekunden sind 10 Millisekunden
+            // Die Duration muss kleiner als dieser Wert sein, damit der Test nicht fehlschlägt
+            assertTrue(Duration.between(starts, ends).getNano() < 10_000_000);
         }
     }
 }
