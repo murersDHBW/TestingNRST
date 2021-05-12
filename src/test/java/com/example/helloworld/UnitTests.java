@@ -55,4 +55,24 @@ class UnitTests {
         // Server geloggt
         assertTrue(true);
     }
+
+    @Test
+    @DisplayName("Tankdruck Logtest")
+    @Description("Prüft ob etwas in das Log geschrieben wird, wenn der Tank keinen optimalen Druck hat")
+    void CheckPressureLimitLogging(){
+        Tank t1 = new Tank();
+        StatusCode statusCode = t1.GetStatusForTankQuantity();
+
+        String testServer = "dies.ist.die.adresse.zum.testserver";
+        int testPort = 8080;
+        ServerLog log = new ServerLog(testServer, testPort);
+
+        Notifications notifications = new Notifications(log);
+        int logCount = log.LogCount;
+        notifications.ReactToStatusCode(statusCode);
+
+        if(statusCode != TankStatusCodes.OptimalQuantity){
+            assertTrue(logCount != log.LogCount);
+        }
+    }
 }

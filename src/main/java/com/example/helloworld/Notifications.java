@@ -2,6 +2,12 @@ package com.example.helloworld;
 
 public class Notifications {
 
+    private ServerLog _log = null;
+
+    public Notifications(ServerLog log){
+        _log = log;
+    }
+
     public void ReactToStatusCode(StatusCode code) {
         if (code == TankStatusCodes.DangerAhead) {
             Alarm();
@@ -15,6 +21,11 @@ public class Notifications {
         } else if (code == TankStatusCodes.Underpressure || code == TankStatusCodes.Overpressure) {
             SendNotification(code.StatusMessage, "Betriebsführer");
             SendNotification(code.StatusMessage, "Wartungsteam");
+        }
+
+        // Bei jedem Überschreiten einer Grenze wird etwas geloggt
+        if(code != TankStatusCodes.OptimalQuantity){
+            _log.WriteInfo(code.StatusMessage);
         }
     }
 
