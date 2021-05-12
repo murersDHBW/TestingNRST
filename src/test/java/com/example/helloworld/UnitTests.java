@@ -75,4 +75,23 @@ class UnitTests {
             assertTrue(logCount != log.LogCount);
         }
     }
+
+    @Test
+    @DisplayName("Spannung an Messfühler")
+    @Description("Wenn Spannung unter 5V, muss akustisches Signal gesendet werden.")
+    void VoltageTest() {
+        SpannungsMesser s1 = new SpannungsMesser();
+
+        for (int i = 0; i < 10000; i++) {
+
+            double value = s1.returnCurrentVoltage();
+            boolean alert = s1.alertVoltageTooHigh(value);
+
+            if(value<=5) {
+                assertTrue(alert);
+            } else {
+                assertFalse(alert);
+            }
+        }
+    }
 }
