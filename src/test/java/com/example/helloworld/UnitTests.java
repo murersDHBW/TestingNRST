@@ -104,7 +104,7 @@ class UnitTests {
     @DisplayName("Spannung an Messfühler")
     @Description("Wenn Spannung unter 5V, muss akustisches Signal gesendet werden.")
     void VoltageTest() {
-        SpannungsMesser s1 = new SpannungsMesser();
+        Voltameter s1 = new Voltameter();
 
         for (int i = 0; i < 10000; i++) {
 

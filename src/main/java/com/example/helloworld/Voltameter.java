@@ -1,8 +1,9 @@
 package com.example.helloworld;
 
-public class SpannungsMesser {
+// Ein Spannungsmesser
+public class Voltameter {
 
-    public SpannungsMesser() {
+    public Voltameter() {
 
     }
 
