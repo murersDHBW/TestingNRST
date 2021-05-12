@@ -37,8 +37,24 @@ public class Notifications {
         System.out.println("Es wird ein Ton abgespielt");
     }
 
+
     public void SendNotification(String msg, String recipient) {
         System.out.println("Es wird eine Nachricht mit dem Inhalt [" + msg + "] an [" + recipient + "] geschickt");
+    }
+
+    public static String GetTankQuantity(double p, String role){
+
+        if(role.equals("OperationsManager")){
+            return p + " " + role;
+        }
+        else if(role.equals("MaintenanceTeam"))
+        {
+           return p + " " + role;
+        }
+        else{
+            return "Kein Zugriff " + role;
+        }
+
     }
 
 }
