@@ -4,9 +4,9 @@ import java.util.Random;
 
 public class PersonRole {
 
-    public static Person OperationsManager = new Person("OperationsManager", true);
-    public static Person MaintenanceTeam = new Person("MaintenanceTeam", true);
-    public static Person OtherPerson = new Person("OtherPerson", false);
+    public static Person OperationsManager = new Person("OperationsManager");
+    public static Person MaintenanceTeam = new Person("MaintenanceTeam");
+    public static Person OtherPerson = new Person("OtherPerson");
 
     Person[] personlist = new Person[]{OperationsManager, MaintenanceTeam, OtherPerson};
 

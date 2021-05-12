@@ -2,11 +2,9 @@ package com.example.helloworld;
 
 public class Person {
     public String Role;
-    public boolean CallUpData;
 
-    public Person(String role, boolean callUpData){
+    public Person(String role){
         Role = role;
-        CallUpData = callUpData;
     }
 
     public Person() {
@@ -15,23 +13,16 @@ public class Person {
 
     public String getRole() { return Role;}
 
-    public void setRole(String role) {
+    public String setRole(String role) {
         Role = role;
+        return role;
     }
 
-    public boolean isCallUpData() {
-        return CallUpData;
-    }
-
-    public void setCallUpData(boolean callUpData) {
-        CallUpData = callUpData;
-    }
 
     @Override
     public String toString() {
         return "Person{" +
                 "Role='" + Role + '\'' +
-                ", CallUpData=" + CallUpData +
                 '}';
     }
 }

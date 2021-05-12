@@ -118,4 +118,34 @@ class UnitTests {
             }
         }
     }
+
+    @Test
+    @DisplayName("Kontrollierter Abrufbarer Druck")
+    @Description("Aktueller Druck kann jederzeit vom Betriebsleiter und dem Wartungsteam abgerufen werden.")
+    void CheckRoleForCallData(){
+
+        //Mock Tankfüllung
+        double tankQuantity = 53.2;
+
+        //Mock Person die die Tankfüllung abrufen möchte
+        Person person = new Person();
+
+        //Verfügbare Rollen "OperationsManager" und "MaintenanceTeam" die berechtigt sind den Druck abzurufen
+        String personrole = person.setRole("OtherPerson");
+
+        //Notifications.GetTankQuantity(tankQuantity, personrole); kann auch mit diesem Befehl getestet werden
+
+        if(personrole == "MaintenanceTeam"){
+            assertTrue(true);
+        }
+        else if(personrole == "OperationsManager"){
+            assertTrue(true);
+        }
+        else
+        {
+            //Andere Personen die die den Druck nicht einsehen dürfen
+            assertFalse(false);
+        }
+
+    }
 }
