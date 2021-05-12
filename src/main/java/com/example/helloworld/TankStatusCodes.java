@@ -1,6 +1,6 @@
 package com.example.helloworld;
 
-public class StatusCodes {
+public class TankStatusCodes {
 
     public static StatusCode CriticalUnderpresssure = new StatusCode(1, "Akustisches Signal und Benachrichtigung an Betriebsführer");
 

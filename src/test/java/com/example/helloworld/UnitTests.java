@@ -15,22 +15,22 @@ class UnitTests {
     void CheckForCorrectStatusCode() {
 
         Tank t1 = new Tank();
-        StatusCode statusCode = Notifications.GetStatusForTankQuantity(t1.getQuantity());
+        StatusCode statusCode = t1.GetStatusForTankQuantity();
 
         if (statusCode.TankPressure <= 49 && statusCode.TankPressure >= 1) {
-            assertEquals(statusCode.ID, StatusCodes.CriticalUnderpresssure.ID);
+            assertEquals(statusCode.ID, TankStatusCodes.CriticalUnderpresssure.ID);
         } else if (statusCode.TankPressure >= 301 && statusCode.TankPressure <= 501) {
-            assertEquals(statusCode.ID, StatusCodes.CriticalOverpressure.ID);
+            assertEquals(statusCode.ID, TankStatusCodes.CriticalOverpressure.ID);
         } else if (statusCode.TankPressure >= 501) {
-            assertEquals(statusCode.ID, StatusCodes.DangerAhead.ID);
+            assertEquals(statusCode.ID, TankStatusCodes.DangerAhead.ID);
         } else if (statusCode.TankPressure >= 181 && statusCode.TankPressure <= 219) {
-            assertEquals(statusCode.ID, StatusCodes.OptimalQuantity.ID);
+            assertEquals(statusCode.ID, TankStatusCodes.OptimalQuantity.ID);
         } else if (statusCode.TankPressure >= 50 && statusCode.TankPressure <= 180) {
-            assertEquals(statusCode.ID, StatusCodes.Underpressure.ID);
+            assertEquals(statusCode.ID, TankStatusCodes.Underpressure.ID);
         } else if (statusCode.TankPressure >= 220) {
-            assertEquals(statusCode.ID, StatusCodes.Overpressure.ID);
+            assertEquals(statusCode.ID, TankStatusCodes.Overpressure.ID);
         } else {
-            assertEquals(statusCode.ID, StatusCodes.StatusError.ID);
+            assertEquals(statusCode.ID, TankStatusCodes.StatusError.ID);
         }
     }
 

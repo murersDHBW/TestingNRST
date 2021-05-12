@@ -1,10 +1,12 @@
 package com.example.helloworld;
 
+import java.util.Objects;
+
 public class StatusCode {
 
     public StatusCode(int id, String errorMessage){
         ID = id;
-        ErrorMessage = errorMessage;
+        StatusMessage = errorMessage;
     }
 
     public int getID() {
@@ -16,16 +18,16 @@ public class StatusCode {
     }
 
     public String getErrorMessage() {
-        return ErrorMessage;
+        return StatusMessage;
     }
 
     public void setErrorMessage(String errorMessage) {
-        ErrorMessage = errorMessage;
+        StatusMessage = errorMessage;
     }
 
     public int ID;
 
-    public String ErrorMessage;
+    public String StatusMessage;
 
     public double getTankPressure() {
         return TankPressure;
@@ -41,8 +43,21 @@ public class StatusCode {
     public String toString() {
         return "StatusCode{" +
                 "ID=" + ID +
-                ", ErrorMessage='" + ErrorMessage + '\'' +
+                ", ErrorMessage='" + StatusMessage + '\'' +
                 ", TankPressure=" + TankPressure +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        StatusCode that = (StatusCode) o;
+        return ID == that.ID;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID);
     }
 }
