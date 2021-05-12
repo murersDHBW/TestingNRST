@@ -12,30 +12,24 @@ class UnitTests {
     @Test
     @DisplayName("Statuscode prüfen")
     @Description("Überprüft ob der korrekte StatusCode für den Status des Tanks zurückgegeben wird")
-    void CheckForCorrectStatusCode(){
+    void CheckForCorrectStatusCode() {
 
         Tank t1 = new Tank();
         StatusCode statusCode = Notifications.GetStatusForTankQuantity(t1.getQuantity());
 
-        if (statusCode.TankPressure <= 49 && statusCode.TankPressure >= 1){
+        if (statusCode.TankPressure <= 49 && statusCode.TankPressure >= 1) {
             assertEquals(statusCode.ID, StatusCodes.CriticalUnderpresssure.ID);
-        }
-        else if (statusCode.TankPressure >= 301 && statusCode.TankPressure <= 501){
+        } else if (statusCode.TankPressure >= 301 && statusCode.TankPressure <= 501) {
             assertEquals(statusCode.ID, StatusCodes.CriticalOverpressure.ID);
-        }
-        else if(statusCode.TankPressure >= 501){
+        } else if (statusCode.TankPressure >= 501) {
             assertEquals(statusCode.ID, StatusCodes.DangerAhead.ID);
-        }
-        else if(statusCode.TankPressure >= 181 && statusCode.TankPressure<= 219){
+        } else if (statusCode.TankPressure >= 181 && statusCode.TankPressure <= 219) {
             assertEquals(statusCode.ID, StatusCodes.OptimalQuantity.ID);
-        }
-        else if(statusCode.TankPressure >= 50 && statusCode.TankPressure<= 180){
+        } else if (statusCode.TankPressure >= 50 && statusCode.TankPressure <= 180) {
             assertEquals(statusCode.ID, StatusCodes.Underpressure.ID);
-        }
-        else if(statusCode.TankPressure >= 220){
+        } else if (statusCode.TankPressure >= 220) {
             assertEquals(statusCode.ID, StatusCodes.Overpressure.ID);
-        }
-        else {
+        } else {
             assertEquals(statusCode.ID, StatusCodes.StatusError.ID);
         }
     }
@@ -43,8 +37,9 @@ class UnitTests {
     @Test
     @DisplayName("ServerLog Stresstest")
     @Description("Loggt viele Nachrichten an den Server in kurzer Zeit")
-    @Timeout(5) // Sekunden
-    void ServerLogStressTest(){
+    @Timeout(5)
+        // Sekunden
+    void ServerLogStressTest() {
         String testServer = "dies.ist.die.adresse.zum.testserver";
         int testPort = 8080;
 
@@ -52,7 +47,7 @@ class UnitTests {
 
         // Strings von zufälliger Länge erstellen
         for (int i = 0; i < 10000; i++) {
-            int messageLength = (int)Util.GenerateRandomNumber(10, 100);
+            int messageLength = (int) Util.GenerateRandomNumber(10, 100);
             log.WriteInfo(Util.GenerateRandomString(messageLength));
         }
 
