@@ -2,7 +2,12 @@ package com.example.helloworld;
 
 import java.util.Random;
 
-public class Util {
+public final class Util {
+
+    // Private constructor damit Util nicht instanziert wird
+    private Util() {
+        throw new IllegalStateException("Util class");
+    }
 
     public static double GenerateRandomNumber(double min, double max) {
         double randomFloatNumber = min + Math.random() * (max - min);
