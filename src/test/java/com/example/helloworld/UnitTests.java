@@ -14,35 +14,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class UnitTests {
 
     @Test
-    @DisplayName("Statuscode prüfen")
-    @Description("Überprüft ob der korrekte StatusCode für den Status des Tanks zurückgegeben wird")
-    void CheckForCorrectStatusCode() {
-
-        Tank t1 = new Tank();
-        StatusCode statusCode = t1.GetStatusForTankQuantity();
-
-        if (statusCode.TankPressure <= 49 && statusCode.TankPressure >= 1) {
-            assertEquals(statusCode.ID, TankStatusCodes.CriticalUnderpresssure.ID);
-        } else if (statusCode.TankPressure >= 301 && statusCode.TankPressure <= 501) {
-            assertEquals(statusCode.ID, TankStatusCodes.CriticalOverpressure.ID);
-        } else if (statusCode.TankPressure >= 501) {
-            assertEquals(statusCode.ID, TankStatusCodes.DangerAhead.ID);
-        } else if (statusCode.TankPressure >= 181 && statusCode.TankPressure <= 219) {
-            assertEquals(statusCode.ID, TankStatusCodes.OptimalQuantity.ID);
-        } else if (statusCode.TankPressure >= 50 && statusCode.TankPressure <= 180) {
-            assertEquals(statusCode.ID, TankStatusCodes.Underpressure.ID);
-        } else if (statusCode.TankPressure >= 220) {
-            assertEquals(statusCode.ID, TankStatusCodes.Overpressure.ID);
-        } else {
-            assertEquals(statusCode.ID, TankStatusCodes.StatusError.ID);
-        }
-    }
-
-    @Test
     @DisplayName("ServerLog Stresstest")
     @Description("Loggt viele Nachrichten an den Server in kurzer Zeit")
     @Timeout(5)
-        // Sekunden
     void ServerLogStressTest() {
         String testServer = "dies.ist.die.adresse.zum.testserver";
         int testPort = 8080;
@@ -64,8 +38,12 @@ class UnitTests {
     @DisplayName("Tankdruck Logtest")
     @Description("Prüft ob etwas in das Log geschrieben wird, wenn der Tank keinen optimalen Druck hat")
     void CheckPressureLimitLogging() {
-        Tank t1 = new Tank();
-        StatusCode statusCode = t1.GetStatusForTankQuantity();
+
+        FakePressureSensor fakePressureSensor = new FakePressureSensor();
+        fakePressureSensor.setPressure(Util.GenerateRandomNumber(0, 600));
+
+        Tank t1 = new Tank(fakePressureSensor);
+        StatusCode statusCode = t1.getStatus();
 
         String testServer = "dies.ist.die.adresse.zum.testserver";
         int testPort = 8080;
@@ -75,7 +53,7 @@ class UnitTests {
         int logCount = log.LogCount;
         notifications.ReactToStatusCode(statusCode);
 
-        if (statusCode != TankStatusCodes.OptimalQuantity) {
+        if (statusCode != TankStatusCodes.OptimalPressure) {
             assertTrue(logCount != log.LogCount);
         }
     }
@@ -84,14 +62,18 @@ class UnitTests {
     @DisplayName("Prüfe Tank Antwortzeit")
     @Description("Es wird 30 Minuten lang getestet, ob die Antwortzeit des Tanks stetig unter 10ms liegt.")
     void EnsureTankStatusMessageBelow10ms() {
-        Tank testTank = new Tank();
+
+        FakePressureSensor fakePressureSensor = new FakePressureSensor();
+        fakePressureSensor.setPressure(Util.GenerateRandomNumber(0, 600));
+
+        Tank testTank = new Tank(fakePressureSensor);
 
         long testDuration = TimeUnit.NANOSECONDS.convert(30L, TimeUnit.MINUTES);
         long endTime = System.nanoTime() + testDuration;
 
         while (System.nanoTime() < endTime) {
             Instant starts = Instant.now();
-            testTank.GetStatusForTankQuantity();
+            testTank.getStatus();
             Instant ends = Instant.now();
 
             // 10_000_000 Nanosekunden sind 10 Millisekunden

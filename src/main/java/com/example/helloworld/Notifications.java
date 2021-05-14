@@ -24,7 +24,7 @@ public class Notifications {
         }
 
         // Bei jedem Überschreiten einer Grenze wird etwas geloggt
-        if(code != TankStatusCodes.OptimalQuantity){
+        if(code != TankStatusCodes.OptimalPressure){
             _log.WriteInfo(code.StatusMessage);
         }
     }

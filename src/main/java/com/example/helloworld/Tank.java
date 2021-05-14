@@ -2,12 +2,18 @@ package com.example.helloworld;
 
 public class Tank {
 
-    public double getQuantity(){
-        return Util.GenerateRandomNumber(1, 600);
+    private IReadPressure pressureSensor;
+
+    public Tank(IReadPressure sensor){
+        pressureSensor = sensor;
     }
 
-    public StatusCode GetStatusForTankQuantity(){
-        double p = getQuantity();
+    public double getPressure(){
+        return pressureSensor.readPressure();
+    }
+
+    public StatusCode getStatus(){
+        double p = getPressure();
 
         if (p <= 49 && p >= 1){
             StatusCode code = TankStatusCodes.CriticalUnderpresssure;
@@ -25,7 +31,7 @@ public class Tank {
             return code;
         }
         else if(p >= 181 && p<= 219){
-            StatusCode code = TankStatusCodes.OptimalQuantity;
+            StatusCode code = TankStatusCodes.OptimalPressure;
             code.TankPressure = p;
             return code;
         }
