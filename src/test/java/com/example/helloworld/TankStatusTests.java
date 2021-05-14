@@ -16,7 +16,7 @@ class TankStatusTests {
 
         for (double value : values){
             fakePressureSensor.setPressure(value);
-            assertSame(tank.getStatus(), TankStatusCodes.CriticalUnderpresssure);
+            assertSame(TankStatusCodes.CriticalUnderpresssure, tank.getStatus());
         }
     }
 
@@ -27,11 +27,11 @@ class TankStatusTests {
         FakePressureSensor fakePressureSensor = new FakePressureSensor();
         Tank tank = new Tank(fakePressureSensor);
 
-        double[] values = {301, 500, 1000};
+        double[] values = {301, 500};
 
         for (double value : values){
             fakePressureSensor.setPressure(value);
-            assertSame(tank.getStatus(), TankStatusCodes.CriticalOverpressure);
+            assertSame(TankStatusCodes.CriticalOverpressure, tank.getStatus());
         }
     }
 
@@ -46,7 +46,7 @@ class TankStatusTests {
 
         for (double value : values){
             fakePressureSensor.setPressure(value);
-            assertSame(tank.getStatus(), TankStatusCodes.OptimalPressure);
+            assertSame(TankStatusCodes.OptimalPressure, tank.getStatus());
         }
     }
 
@@ -62,7 +62,7 @@ class TankStatusTests {
 
         for (double value : values){
             fakePressureSensor.setPressure(value);
-            assertSame(tank.getStatus(), TankStatusCodes.Underpressure);
+            assertSame(TankStatusCodes.Underpressure, tank.getStatus());
         }
     }
 
@@ -77,7 +77,7 @@ class TankStatusTests {
 
         for (double value : values){
             fakePressureSensor.setPressure(value);
-            assertSame(tank.getStatus(), TankStatusCodes.Overpressure);
+            assertSame(TankStatusCodes.Overpressure, tank.getStatus());
         }
     }
 
@@ -92,7 +92,22 @@ class TankStatusTests {
 
         for (double value : values){
             fakePressureSensor.setPressure(value);
-            assertSame(tank.getStatus(), TankStatusCodes.DangerAhead);
+            assertSame(TankStatusCodes.DangerAhead, tank.getStatus());
+        }
+    }
+
+    @Test
+    @DisplayName("Ungültige Druckwerte prüfen")
+    void CheckInvalidPressure(){
+
+        FakePressureSensor fakePressureSensor = new FakePressureSensor();
+        Tank tank = new Tank(fakePressureSensor);
+
+        double[] values = {-10, -500};
+
+        for (double value : values){
+            fakePressureSensor.setPressure(value);
+            assertSame(TankStatusCodes.StatusError, tank.getStatus());
         }
     }
 }

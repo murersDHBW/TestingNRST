@@ -15,12 +15,12 @@ public class Tank {
     public StatusCode getStatus(){
         double p = getPressure();
 
-        if (p <= 49 && p >= 1){
+        if (p <= 49 && p >= 0){
             StatusCode code = TankStatusCodes.CriticalUnderpresssure;
             code.TankPressure = p;
             return code;
         }
-        else if (p >= 301 && p <= 501){
+        else if (p >= 301 && p <= 500){
             StatusCode code = TankStatusCodes.CriticalOverpressure;
             code.TankPressure = p;
             return code;
