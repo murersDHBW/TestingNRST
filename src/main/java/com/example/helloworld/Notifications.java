@@ -24,7 +24,7 @@ public class Notifications {
         }
 
         // Bei jedem Überschreiten einer Grenze wird etwas geloggt
-        if(code != TankStatusCodes.OptimalQuantity){
+        if(code != TankStatusCodes.OptimalPressure){
             _log.WriteInfo(code.StatusMessage);
         }
     }
@@ -42,7 +42,7 @@ public class Notifications {
         System.out.println("Es wird eine Nachricht mit dem Inhalt [" + msg + "] an [" + recipient + "] geschickt");
     }
 
-    public static String GetTankQuantity(double p, String role){
+    public static String GetTankPressure(double p, String role){
 
         if(role.equals("OperationsManager")){
             return p + " " + role;

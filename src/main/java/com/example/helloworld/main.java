@@ -3,11 +3,14 @@ package com.example.helloworld;
 class Main {
     public static void main (String[] args) {
 
+        PressureSensor sensor = new PressureSensor();
+        Tank t1 = new Tank(sensor);
 
-        Tank t1 = new Tank();
-        double tankQuantity = t1.getQuantity();
+        double tankPressure = t1.getPressure();
+
         PersonRole personrole = new PersonRole();
+
         System.out.print(
-                Notifications.GetTankQuantity(tankQuantity, personrole.getRandomPerson()));
+                Notifications.GetTankPressure(tankPressure, personrole.getRandomPerson()));
     }
 }

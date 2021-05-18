@@ -8,7 +8,7 @@ public class TankStatusCodes {
 
     public static StatusCode DangerAhead = new StatusCode(3, "Alarm auslösen und Evakuierung des Gebäudes");
 
-    public static StatusCode OptimalQuantity = new StatusCode(4, "Der Stand ist in einem Soliden gediegenen Bereich");
+    public static StatusCode OptimalPressure = new StatusCode(4, "Der Stand ist in einem Soliden gediegenen Bereich");
 
     public static StatusCode Underpressure = new StatusCode(5, "Benachrichtigung an Betriebsführer und Information an Wartungsteam");
 
