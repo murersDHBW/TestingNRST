@@ -1,4 +1,7 @@
-package com.example.helloworld;
+package KawumAG_Test;
+import KawumAG.FakePressureSensor;
+import KawumAG.Tank;
+import KawumAG.TankStatusCodes;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertSame;

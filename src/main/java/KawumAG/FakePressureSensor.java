@@ -1,4 +1,4 @@
-package com.example.helloworld;
+package KawumAG;
 
 // Fake Drucksensor, bei dem der Druck nicht ausgelesen werden muss, sondern im Code
 // gesetzt werden kann. Wird zum testen von verschiedenen Druckwerten benutzt

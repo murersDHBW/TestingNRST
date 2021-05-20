@@ -1,4 +1,4 @@
-package com.example.helloworld;
+package KawumAG;
 
 public class Person {
     public String Role;

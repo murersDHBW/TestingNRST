@@ -1,5 +1,6 @@
-package com.example.helloworld;
+package KawumAG_Test;
 
+import KawumAG.*;
 import jdk.jfr.Description;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
