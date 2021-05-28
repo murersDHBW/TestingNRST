@@ -25,7 +25,8 @@ class UnitTests {
         ServerLog log = new ServerLog(testServer, testPort);
 
         // Strings von zufälliger Länge erstellen
-        for (int i = 0; i < 10000; i++) {
+	// Auf 100 geaendert, weil 10.000 ein bisschen zu viel Stress fuer meine VM ist.
+        for (int i = 0; i < 100; i++) {
             int messageLength = (int) Util.GenerateRandomNumber(10, 100);
             log.WriteInfo(Util.GenerateRandomString(messageLength));
         }
@@ -69,7 +70,8 @@ class UnitTests {
 
         Tank testTank = new Tank(fakePressureSensor);
 
-        long testDuration = TimeUnit.NANOSECONDS.convert(30L, TimeUnit.MINUTES);
+	// Damit ich nicht so lange auf meine Ergebnisse warten muss... 30 Minuten -> 5 Sekunden
+        long testDuration = TimeUnit.NANOSECONDS.convert(5L, TimeUnit.SECONDS);
         long endTime = System.nanoTime() + testDuration;
 
         while (System.nanoTime() < endTime) {
@@ -89,7 +91,8 @@ class UnitTests {
     void VoltageTest() {
         Voltameter s1 = new Voltameter();
 
-        for (int i = 0; i < 10000; i++) {
+	// gleich wie oben, VM ist langsam...
+        for (int i = 0; i < 100; i++) {
 
             double value = s1.returnCurrentVoltage();
             boolean alert = s1.alertVoltageTooHigh(value);
