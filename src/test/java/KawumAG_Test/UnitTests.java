@@ -61,31 +61,6 @@ class UnitTests {
     }
 
     @Test
-    @DisplayName("Prüfe Tank Antwortzeit")
-    @Description("Es wird 30 Minuten lang getestet, ob die Antwortzeit des Tanks stetig unter 10ms liegt.")
-    void EnsureTankStatusMessageBelow10ms() {
-
-        FakePressureSensor fakePressureSensor = new FakePressureSensor();
-        fakePressureSensor.setPressure(Util.GenerateRandomNumber(0, 600));
-
-        Tank testTank = new Tank(fakePressureSensor);
-
-	// Damit ich nicht so lange auf meine Ergebnisse warten muss... 30 Minuten -> 5 Sekunden
-        long testDuration = TimeUnit.NANOSECONDS.convert(5L, TimeUnit.SECONDS);
-        long endTime = System.nanoTime() + testDuration;
-
-        while (System.nanoTime() < endTime) {
-            Instant starts = Instant.now();
-            testTank.getStatus();
-            Instant ends = Instant.now();
-
-            // 10_000_000 Nanosekunden sind 10 Millisekunden
-            // Die Duration muss kleiner als dieser Wert sein, damit der Test nicht fehlschlägt
-            assertTrue(Duration.between(starts, ends).getNano() < 10_000_000);
-        }
-    }
-
-    @Test
     @DisplayName("Spannung an Messfühler")
     @Description("Wenn Spannung unter 5V, muss akustisches Signal gesendet werden.")
     void VoltageTest() {
